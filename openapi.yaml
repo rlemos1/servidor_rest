@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  title: Dog API Server
+  description: API para gerenciar raças de cães e favoritos.
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /breeds:
+    get:
+      summary: Retrieve all dog breeds
+      parameters:
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      responses:
+        '200':
+          description: List of dog breeds
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: object
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Add a new dog breed
+      parameters:
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      requestBody:
+        description: Breed data to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                breed:
+                  type: string
+      responses:
+        '200':
+          description: Breed added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  breed:
+                    type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /breeds/{breed_id}:
+    get:
+      summary: Retrieve a specific breed by ID
+      parameters:
+        - name: breed_id
+          in: path
+          description: ID of the breed to retrieve
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      responses:
+        '200':
+          description: Breed details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  url:
+                    type: string
+        '404':
+          description: Breed not found
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update a specific breed by ID
+      parameters:
+        - name: breed_id
+          in: path
+          description: ID of the breed to update
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      requestBody:
+        description: Updated breed data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                breed:
+                  type: string
+      responses:
+        '200':
+          description: Breed updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  breed:
+                    type: string
+        '404':
+          description: Breed not found
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete a specific breed by ID
+      parameters:
+        - name: breed_id
+          in: path
+          description: ID of the breed to delete
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      responses:
+        '200':
+          description: Breed deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Breed not found
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /favorites:
+    post:
+      summary: Add a new favorite
+      parameters:
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      requestBody:
+        description: Favorite data to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Favorite added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  favorite:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      url:
+                        type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+    get:
+      summary: Retrieve all favorites
+      parameters:
+        - name: format
+          in: query
+          description: Format of the response (json, xml, protobuf)
+          required: false
+          schema:
+            type: string
+            default: json
+      responses:
+        '200':
+          description: List of favorites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    url:
+                      type: string
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Favorite:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
