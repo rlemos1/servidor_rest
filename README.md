@@ -22,8 +22,3 @@ O projeto é dividido em três partes principais:
 ## Configuração
 
 ### Servidor REST
-
-1. **Instale as dependências**:
-
-   ```bash
-   pip install flask requests protobuf dicttoxml
