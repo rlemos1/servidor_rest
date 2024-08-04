@@ -73,3 +73,7 @@ Instale as dependências e execute a aplicação Flask para servir a interface w
 Cliente Móvel:
 
 Instale as dependências e execute a aplicação Kivy para gerenciar favoritos.
+
+## Documento de especifiações
+
+openapi.yaml
