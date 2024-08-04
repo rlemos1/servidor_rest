@@ -22,3 +22,54 @@ O projeto é dividido em três partes principais:
 ## Configuração
 
 ### Servidor REST
+
+1. Servidor
+Função: Serve como o backend da aplicação, fornecendo uma API RESTful para gerenciar raças de cachorros e imagens favoritas.
+
+Endpoints Principais:
+
+/breeds:
+GET: Obtém a lista de raças de cachorros da API externa (dog.ceo).
+POST: Adiciona uma nova raça ao banco de dados simulado.
+/breeds/{breed_id}:
+GET: Obtém detalhes de uma raça específica.
+PUT: Atualiza informações de uma raça específica.
+DELETE: Remove uma raça específica do banco de dados.
+/favorites:
+POST: Adiciona uma nova imagem aos favoritos.
+GET: Obtém a lista de imagens favoritas.
+
+### Cliente Web
+Função: Interface web para visualizar e adicionar favoritos.
+
+Tecnologias Usadas:
+
+Flask: Framework para criar a aplicação web.
+HTML: Para a estrutura da página web.
+Funcionalidades:
+
+Adicionar Favorito: Permite que os usuários adicionem URLs de imagens aos favoritos.
+Visualizar Favoritos: Exibe uma lista de URLs de imagens favoritas como links clicáveis.
+
+### Cliente Móvel (Kivy)
+Função: Aplicação móvel para gerenciar e visualizar favoritos.
+
+Tecnologias Usadas:
+
+Kivy: Framework para criar a interface gráfica móvel.
+Funcionalidades:
+
+Adicionar Favorito: Permite que os usuários adicionem URLs de imagens aos favoritos.
+Atualizar Lista de Favoritos: Exibe a lista de favoritos como URLs.
+
+### Instalação e Execução
+
+Servidor Flask:
+
+Instale as dependências e execute o servidor Flask para fornecer a API.
+Cliente Web:
+
+Instale as dependências e execute a aplicação Flask para servir a interface web.
+Cliente Móvel:
+
+Instale as dependências e execute a aplicação Kivy para gerenciar favoritos.
