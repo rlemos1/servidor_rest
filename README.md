@@ -1,4 +1,4 @@
-# Dog API Server
+# AT3 API Server
 
 Este projeto é um servidor REST que permite a interação com uma API de terceiros para gerenciar raças de cães e favoritos de imagens de cães. A API é construída usando Flask e oferece suporte a operações básicas para adicionar, listar e gerenciar informações sobre raças e imagens favoritas.
 
