@@ -39,6 +39,8 @@ DELETE: Remove uma raça específica do banco de dados.
 POST: Adiciona uma nova imagem aos favoritos.
 GET: Obtém a lista de imagens favoritas.
 
+Para executar o servidor, abrir o caminho do arquivo e executar o app.py
+
 ### Cliente Web
 Função: Interface web para visualizar e adicionar favoritos.
 
@@ -50,6 +52,8 @@ Funcionalidades:
 
 Adicionar Favorito: Permite que os usuários adicionem URLs de imagens aos favoritos.
 Visualizar Favoritos: Exibe uma lista de URLs de imagens favoritas como links clicáveis.
+
+Para executar o cliente web abrir o caminho do arquivo e executar o app.py
 
 ### Cliente Móvel (Kivy)
 Função: Aplicação móvel para gerenciar e visualizar favoritos.
@@ -73,6 +77,8 @@ Instale as dependências e execute a aplicação Flask para servir a interface w
 Cliente Móvel:
 
 Instale as dependências e execute a aplicação Kivy para gerenciar favoritos.
+
+Para executar o servidor, abrir o caminho do arquivo e executar o main.py
 
 ## Documento de especifiações
 
