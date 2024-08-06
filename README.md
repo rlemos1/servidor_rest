@@ -39,6 +39,15 @@ DELETE: Remove uma raça específica do banco de dados.
 POST: Adiciona uma nova imagem aos favoritos.
 GET: Obtém a lista de imagens favoritas.
 
+2. Criação de endpoits para visualização das imagens favoritas. Tem na especificação do swagger mas coloquei aqui para facilitar a visualização dos diferentes de dados aceitos no servidor.
+
+http://127.0.0.1:5000/favorites/json
+
+http://127.0.0.1:5000/favorites/xml
+
+http://127.0.0.1:5000/favorites/protobuff
+
+
 Para executar o servidor, abrir o caminho do arquivo e executar o app.py
 
 ### Cliente Web

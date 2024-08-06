@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, Response
 import requests
 from google.protobuf.json_format import MessageToJson
-import protobuf.favorite_pb2 as favorite_pb2
+import favorite_pb2  # Certifique-se de que o nome do módulo está correto
 
 app = Flask(__name__)
 
@@ -18,11 +18,17 @@ def format_response(data, format):
     elif format == 'protobuf':
         if isinstance(data, list):
             # Convertendo uma lista de dicionários em uma mensagem protobuf
-            response = [favorite_pb2.Favorite(id=item['id'], url=item['url']) for item in data]
-            serialized = b"".join(fav.SerializeToString() for fav in response)
+            response = favorite_pb2.FavoriteList()
+            for item in data:
+                fav = response.favorites.add()
+                fav.id = item['id']
+                fav.url = item['url']
+            serialized = response.SerializeToString()
             return Response(serialized, mimetype='application/x-protobuf')
         elif isinstance(data, dict):
-            favorite = favorite_pb2.Favorite(id=data["id"], url=data["url"])
+            favorite = favorite_pb2.Favorite()
+            favorite.id = data["id"]
+            favorite.url = data["url"]
             return Response(favorite.SerializeToString(), mimetype='application/x-protobuf')
     else:
         return jsonify(data)
@@ -33,7 +39,6 @@ def manage_breeds():
 
     format = request.args.get('format', 'json')
     if request.method == 'GET':
-        # Consome a API externa para obter informações sobre raças
         response = requests.get(f"{DOG_API_URL}/breeds/list/all")
         if response.status_code == 200:
             breeds = response.json().get('message', {})
@@ -42,7 +47,7 @@ def manage_breeds():
             return format_response({"error": "Unable to fetch breeds from Dog API"}, format), response.status_code
     elif request.method == 'POST':
         breed = request.json
-        breed['id'] = len(breeds_db) + 1  # Gera um novo ID para a raça
+        breed['id'] = len(breeds_db) + 1
         breeds_db.append(breed)
         return format_response({"message": "Breed added", "breed": breed}, format)
 
@@ -86,6 +91,22 @@ def manage_favorites():
         favorite_id = request.json.get('id')
         favorites_db[:] = [f for f in favorites_db if f.get("id") != favorite_id]
         return format_response({"message": "Favorite deleted"}, format)
+
+@app.route('/favorites/json', methods=['GET'])
+def get_favorites_json():
+    global favorites_db
+    return format_response(favorites_db, 'json')
+
+@app.route('/favorites/xml', methods=['GET'])
+def get_favorites_xml():
+    global favorites_db
+    return format_response(favorites_db, 'xml')
+
+@app.route('/favorites/protobuf', methods=['GET'])
+def get_favorites_protobuf():
+    global favorites_db
+    return format_response(favorites_db, 'protobuf')
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
